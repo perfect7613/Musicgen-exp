@@ -1,0 +1,16 @@
+HF dataset: https://huggingface.co/datasets/Perfect7613/musicgen-exp-runpod-results
+
+Uploaded artifact roots:
+- README.md
+- activations_full/
+- metadata/
+- features/
+- sae_checkpoints/
+
+Verification:
+- Hugging Face API listed 630 files after upload.
+- activations_full/ present: true
+- metadata/ present: true
+- features/ present: true
+- sae_checkpoints/ present: true
+

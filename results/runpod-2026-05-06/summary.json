@@ -1,0 +1,26 @@
+{
+  "activation_index_rows": 100,
+  "benchmark_tracks": 100,
+  "date": "2026-05-06",
+  "hf_dataset": "https://huggingface.co/datasets/Perfect7613/musicgen-exp-runpod-results",
+  "important_caveat": "Residual extraction layers do not align with published SAE checkpoint layers; do not use these residual tensors as SAE-aligned features without rerunning aligned extraction.",
+  "recurrence_failures": 2,
+  "recurrence_feature_files_uploaded_to_hf": 100,
+  "recurrence_proposals": 98,
+  "residual_hooks": [
+    "hook_layers.2",
+    "hook_layers.6",
+    "hook_layers.12",
+    "hook_layers.18",
+    "hook_layers.22"
+  ],
+  "residual_tensor_files_uploaded_to_hf": 500,
+  "sae_checkpoint_layers_uploaded_to_hf": [
+    "hook_layers.1",
+    "hook_layers.5",
+    "hook_layers.11",
+    "hook_layers.17",
+    "hook_layers.21"
+  ],
+  "status": "partial_real_run_no_manual_labels"
+}

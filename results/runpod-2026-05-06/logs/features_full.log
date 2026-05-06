@@ -1,0 +1,6 @@
+/workspace/musicgen-exp/src/musicgen_exp/audio_features.py:205: FutureWarning: librosa.beat.tempo
+	This function was moved to 'librosa.feature.rhythm.tempo' in librosa version 0.10.0.
+	This alias will be removed in librosa version 1.0.
+  tempo = librosa.beat.tempo(y=audio, sr=sample_rate, hop_length=hop_length)
+wrote 98 recurrence proposals to data/recurrence_proposals.jsonl
+wrote 2 recurrence failures to data/recurrence_failures.jsonl

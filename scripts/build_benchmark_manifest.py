@@ -37,6 +37,17 @@ def main() -> int:
         default="data/benchmark_manifest.jsonl",
         help="Path where the benchmark manifest JSONL should be written.",
     )
+    parser.add_argument(
+        "--audio-root",
+        default=None,
+        help="Optional root of downloaded real audio; when set, only existing audio files are included.",
+    )
+    parser.add_argument(
+        "--audio-variant",
+        choices=["original", "audio-low"],
+        default="original",
+        help="Audio filename variant to write into the manifest.",
+    )
     args = parser.parse_args()
 
     try:
@@ -50,6 +61,8 @@ def main() -> int:
             prefix_seconds=float(benchmark_config["prefix_seconds"]),
             continuation_seconds=float(benchmark_config["continuation_seconds"]),
             target_clip_count=int(benchmark_config["target_clip_count"]),
+            audio_root=args.audio_root,
+            audio_variant=args.audio_variant,
         )
         output_path = write_manifest_jsonl(manifest, args.output)
     except (FileNotFoundError, ValueError) as exc:

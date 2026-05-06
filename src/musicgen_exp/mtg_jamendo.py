@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 import json
 from pathlib import Path
+import re
 from typing import Iterable
 
 
@@ -49,6 +50,8 @@ def read_autotagging_tsv(path: str | Path) -> list[TrackRecord]:
             if not line or line.startswith("#"):
                 continue
             parts = line.split("\t")
+            if line_number == 1 and parts[:5] == ["TRACK_ID", "ARTIST_ID", "ALBUM_ID", "PATH", "DURATION"]:
+                continue
             if len(parts) < 6:
                 raise ValueError(
                     f"{metadata_path}:{line_number}: expected at least 6 tab-separated fields"
@@ -76,18 +79,36 @@ def read_autotagging_tsv(path: str | Path) -> list[TrackRecord]:
 def read_audio_licenses(path: str | Path) -> dict[str, str]:
     licenses_path = require_existing_file(path, "MTG-Jamendo audio_licenses.txt")
     licenses: dict[str, str] = {}
-    with licenses_path.open("r", encoding="utf-8") as f:
-        for line_number, raw_line in enumerate(f, start=1):
-            line = raw_line.strip()
-            if not line or line.startswith("#"):
-                continue
-            parts = line.split("\t")
-            if len(parts) < 2:
-                raise ValueError(
-                    f"{licenses_path}:{line_number}: expected track id and license fields"
-                )
-            track_id, license_value = parts[0], parts[-1]
+    current_path: str | None = None
+    current_lines: list[str] = []
+
+    def flush_current() -> None:
+        nonlocal current_path, current_lines
+        if current_path is None:
+            return
+        track_id = audio_path_to_track_id(current_path)
+        license_value = "\n".join(current_lines).strip()
+        if license_value:
             licenses[track_id] = license_value
+        current_path = None
+        current_lines = []
+
+    for raw_line in licenses_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if looks_like_audio_path(line):
+            flush_current()
+            current_path = line
+            current_lines = []
+            continue
+        if current_path is not None:
+            current_lines.append(line)
+            continue
+        parts = line.split("\t")
+        if len(parts) >= 2:
+            licenses[parts[0]] = parts[-1]
+    flush_current()
     return licenses
 
 
@@ -97,6 +118,8 @@ def build_benchmark_manifest(
     prefix_seconds: float,
     continuation_seconds: float,
     target_clip_count: int,
+    audio_root: str | Path | None = None,
+    audio_variant: str = "original",
     excluded_tag_fragments: Iterable[str] = ("voice", "vocal"),
 ) -> list[BenchmarkManifestItem]:
     if target_clip_count <= 0:
@@ -106,8 +129,12 @@ def build_benchmark_manifest(
 
     required_duration = prefix_seconds + continuation_seconds
     excluded_fragments = tuple(fragment.lower() for fragment in excluded_tag_fragments)
+    resolved_audio_root = Path(audio_root) if audio_root is not None else None
     manifest: list[BenchmarkManifestItem] = []
     for record in records:
+        manifest_audio_path = audio_path_for_variant(record.audio_path, audio_variant)
+        if resolved_audio_root is not None and not (resolved_audio_root / manifest_audio_path).is_file():
+            continue
         if record.duration_seconds < required_duration:
             continue
         if not record.instrument_tags:
@@ -123,7 +150,7 @@ def build_benchmark_manifest(
                 source_dataset=DATASET_NAME,
                 license=license_value,
                 source_url=f"https://www.jamendo.com/track/{record.track_id}",
-                audio_path=record.audio_path,
+                audio_path=manifest_audio_path,
                 duration_seconds=record.duration_seconds,
                 prefix_window={"start_seconds": 0.0, "end_seconds": float(prefix_seconds)},
                 generation_window={
@@ -143,6 +170,26 @@ def build_benchmark_manifest(
             f"({len(manifest)} found, {target_clip_count} requested)"
         )
     return manifest
+
+
+def looks_like_audio_path(value: str) -> bool:
+    return re.fullmatch(r"\d+/\d+\.mp3", value) is not None
+
+
+def audio_path_to_track_id(audio_path: str) -> str:
+    stem = Path(audio_path).stem
+    return f"track_{int(stem):07d}"
+
+
+def audio_path_for_variant(audio_path: str, audio_variant: str) -> str:
+    if audio_variant == "original":
+        return audio_path
+    if audio_variant == "audio-low":
+        path = Path(audio_path)
+        if path.suffix != ".mp3":
+            raise ValueError(f"cannot derive audio-low path from non-mp3 path: {audio_path}")
+        return str(path.with_name(f"{path.stem}.low{path.suffix}"))
+    raise ValueError(f"unsupported audio_variant: {audio_variant}")
 
 
 def write_manifest_jsonl(items: Iterable[BenchmarkManifestItem], path: str | Path) -> Path:

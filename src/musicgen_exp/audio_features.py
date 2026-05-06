@@ -83,7 +83,7 @@ def propose_recurrence_from_features(
 ) -> RecurrenceProposal:
     librosa = import_librosa()
     features = np.load(feature_path)
-    chroma = features["chroma"]
+    chroma = np.nan_to_num(features["chroma"], nan=0.0, posinf=0.0, neginf=0.0)
     sample_rate = int(features["sample_rate"])
     hop_length = int(features["hop_length"])
 
@@ -111,7 +111,10 @@ def propose_recurrence_from_features(
         )
         candidate = chroma[:, candidate_slice]
         if candidate.shape[1] >= 2:
-            distance = float(librosa.sequence.dtw(X=motif, Y=candidate, metric="cosine")[0][-1, -1])
+            distance = dtw_distance(librosa, motif, candidate)
+            if distance is None:
+                current += step_seconds
+                continue
             if best_distance is None or distance < best_distance:
                 best_distance = distance
                 best_start = current
@@ -130,6 +133,16 @@ def propose_recurrence_from_features(
         dtw_distance=best_distance,
         feature_path=str(feature_path),
     )
+
+
+def dtw_distance(librosa: Any, motif: np.ndarray, candidate: np.ndarray) -> float | None:
+    try:
+        distance = float(librosa.sequence.dtw(X=motif, Y=candidate, metric="cosine")[0][-1, -1])
+    except Exception:
+        return None
+    if not np.isfinite(distance):
+        return None
+    return distance
 
 
 def load_manifest_jsonl(path: str | Path) -> list[dict[str, Any]]:
