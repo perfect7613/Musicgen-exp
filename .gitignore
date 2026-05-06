@@ -14,6 +14,8 @@ outputs/runs/*
 external/
 data/benchmark_manifest.jsonl
 data/recurrence_proposals.jsonl
+data/annotation_splits.json
+data/annotations/*.jsonl
 *.wav
 *.mp3
 *.flac

@@ -56,3 +56,23 @@ uv run python scripts/extract_motif_features.py \
 ```
 
 The command fails if the manifest or real audio files are missing.
+
+## Stage 4: Manual Review And Splits
+
+Prepare a review queue from real recurrence proposals:
+
+```bash
+uv run python scripts/prepare_annotation_review.py \
+  --manifest data/benchmark_manifest.jsonl \
+  --proposals data/recurrence_proposals.jsonl \
+  --output data/annotations/review_queue.jsonl
+```
+
+After human review, create deterministic splits:
+
+```bash
+uv run python scripts/create_annotation_splits.py \
+  --annotations data/annotations/verified.jsonl \
+  --schema schemas/annotation.schema.json \
+  --output data/annotation_splits.json
+```
