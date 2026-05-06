@@ -28,3 +28,16 @@ The manifest records:
 ## Data Integrity
 
 Pipeline stages must not create fake benchmark items, synthetic music examples, or fake model outputs. Stages that need real MTG-Jamendo metadata, real audio, or real MusicGen activations must fail clearly when those inputs are absent.
+
+## Stage 2: Build Benchmark Manifest
+
+After downloading official MTG-Jamendo metadata and `audio_licenses.txt`, build the manifest:
+
+```bash
+uv run python scripts/build_benchmark_manifest.py \
+  --metadata-tsv external/mtg-jamendo-dataset/data/autotagging_instrument.tsv \
+  --audio-licenses external/mtg-jamendo-dataset/audio_licenses.txt \
+  --output data/benchmark_manifest.jsonl
+```
+
+The command fails if the real metadata/license files are missing.

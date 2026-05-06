@@ -46,6 +46,8 @@ uv run python scripts/validate_config.py --config configs/experiment.yaml
 uv run pytest
 ```
 
+Build the benchmark manifest only after downloading official MTG-Jamendo metadata and license files. See [docs/benchmark.md](docs/benchmark.md).
+
 ## RunPod
 
 RunPod setup is documented in [docs/runpod.md](docs/runpod.md). The repo includes helper scripts, but pod creation is intentionally manual/explicit so credits are not spent accidentally.

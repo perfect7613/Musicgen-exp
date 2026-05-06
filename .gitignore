@@ -11,6 +11,8 @@ outputs/audio/*
 outputs/figures/*
 outputs/features/*
 outputs/runs/*
+external/
+data/benchmark_manifest.jsonl
 *.wav
 *.mp3
 *.flac
