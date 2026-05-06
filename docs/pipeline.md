@@ -41,3 +41,18 @@ uv run python scripts/build_benchmark_manifest.py \
 ```
 
 The command fails if the real metadata/license files are missing.
+
+## Stage 3: Extract Motif Features
+
+After the manifest exists and the referenced MTG-Jamendo audio files are available locally:
+
+```bash
+uv sync --extra dev --extra audio
+uv run python scripts/extract_motif_features.py \
+  --manifest data/benchmark_manifest.jsonl \
+  --audio-root /path/to/mtg-jamendo-audio \
+  --features-dir outputs/features \
+  --proposals data/recurrence_proposals.jsonl
+```
+
+The command fails if the manifest or real audio files are missing.

@@ -13,6 +13,7 @@ outputs/features/*
 outputs/runs/*
 external/
 data/benchmark_manifest.jsonl
+data/recurrence_proposals.jsonl
 *.wav
 *.mp3
 *.flac

@@ -48,6 +48,8 @@ uv run pytest
 
 Build the benchmark manifest only after downloading official MTG-Jamendo metadata and license files. See [docs/benchmark.md](docs/benchmark.md).
 
+Extract motif features only from local real audio referenced by that manifest. See [docs/audio-features.md](docs/audio-features.md).
+
 ## RunPod
 
 RunPod setup is documented in [docs/runpod.md](docs/runpod.md). The repo includes helper scripts, but pod creation is intentionally manual/explicit so credits are not spent accidentally.
