@@ -21,6 +21,7 @@ This project extends Singh et al.'s MusicGen SAE work from concept discovery and
 - Primary label: motif recurrence in the continuation.
 - Annotation strategy: chroma/DTW proposals plus manual verification.
 - Release strategy: track IDs, timestamps, licenses, annotations, and scripts. Do not rehost audio unless each license clearly permits it.
+- Data policy: benchmark annotations and experiment artifacts must come from real MTG-Jamendo metadata/audio and real MusicGen/model execution; fake musical data and placeholder benchmark records are prohibited.
 
 ## Experiments
 

@@ -21,6 +21,10 @@ def load_json(path: str | Path) -> dict[str, Any]:
 def validate_annotation(annotation_path: str | Path, schema_path: str | Path) -> list[str]:
     annotation = load_json(annotation_path)
     schema = load_json(schema_path)
+    return validate_annotation_object(annotation, schema)
+
+
+def validate_annotation_object(annotation: dict[str, Any], schema: dict[str, Any]) -> list[str]:
     if Draft202012Validator is None:
         return validate_annotation_minimal(annotation, schema)
     validator = Draft202012Validator(schema)

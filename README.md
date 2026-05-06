@@ -8,6 +8,8 @@ Public framing:
 
 This repo starts from the MusicGen + SAE workflow in PapayaResearch `musicdiscovery` and extends it with future-event probes, held-out causal interventions, and motif-recurrence evaluation on Creative Commons instrumental music.
 
+This project follows a strict [real-data-only policy](docs/data-policy.md): no fake musical benchmark records, synthetic motif fixtures, placeholder annotations, or fake model outputs should be committed as experiment evidence.
+
 ## Research Question
 
 Do any MusicGen residual-stream / SAE features causally influence future musical structure, especially motif recurrence, beyond local fluency or position/time shortcuts?
@@ -39,7 +41,8 @@ src/musicgen_exp/     Reusable experiment code
 
 ```bash
 uv sync --extra dev
-uv run python scripts/validate_annotations.py data/annotations/example.json
+uv run python scripts/validate_annotations.py --schema-only
+uv run pytest
 ```
 
 ## RunPod

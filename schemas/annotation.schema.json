@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/musicgen-exp/annotation.schema.json",
+  "$id": "https://github.com/perfect7613/Musicgen-exp/schemas/annotation.schema.json",
   "title": "MusicGen Long-Horizon Coherence Annotation",
   "type": "object",
   "required": [

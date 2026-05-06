@@ -13,15 +13,30 @@ from musicgen_exp.annotations import validate_annotation  # noqa: E402
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate benchmark annotation JSON files.")
-    parser.add_argument("paths", nargs="+", help="Annotation JSON files to validate.")
+    parser.add_argument("paths", nargs="*", help="Annotation JSON files to validate.")
     parser.add_argument(
         "--schema",
         default="schemas/annotation.schema.json",
         help="Path to annotation JSON schema.",
     )
+    parser.add_argument(
+        "--schema-only",
+        action="store_true",
+        help="Only check that the annotation schema can be loaded.",
+    )
     args = parser.parse_args()
 
     schema_path = Path(args.schema)
+    if args.schema_only:
+        if not schema_path.exists():
+            print(f"{schema_path}: missing", file=sys.stderr)
+            return 1
+        print(f"{schema_path}: ok")
+        return 0
+
+    if not args.paths:
+        parser.error("provide annotation paths or use --schema-only")
+
     had_errors = False
     for raw_path in args.paths:
         annotation_path = Path(raw_path)
