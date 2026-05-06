@@ -93,3 +93,18 @@ uv run python scripts/extract_musicgen_activations.py \
 ```
 
 See `docs/musicgen-integration.md`.
+
+## Stage 6: Train Future-Event Probes
+
+After teacher-forced activations and verified annotation splits exist:
+
+```bash
+uv sync --extra dev --extra analysis
+uv run python scripts/train_future_event_probes.py \
+  --activation-index outputs/activations/teacher_forced/activation_index.jsonl \
+  --annotation-splits data/annotation_splits.json \
+  --activation-kind residual \
+  --output-dir outputs/probes/residual
+```
+
+See `docs/probes.md`.

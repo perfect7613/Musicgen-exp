@@ -1546,6 +1546,10 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+analysis = [
+    { name = "scikit-learn", version = "1.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scikit-learn", version = "1.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+]
 audio = [
     { name = "librosa" },
     { name = "soundfile" },
@@ -1569,11 +1573,12 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
     { name = "sae-lens", marker = "extra == 'model'", specifier = ">=5.0" },
+    { name = "scikit-learn", marker = "extra == 'analysis'", specifier = ">=1.4" },
     { name = "soundfile", marker = "extra == 'audio'", specifier = ">=0.12" },
     { name = "tqdm", specifier = ">=4.66" },
     { name = "transformer-lens", marker = "extra == 'model'", specifier = ">=2.0" },
 ]
-provides-extras = ["audio", "model", "dev"]
+provides-extras = ["audio", "analysis", "model", "dev"]
 
 [[package]]
 name = "narwhals"

@@ -11,6 +11,7 @@ outputs/audio/*
 outputs/figures/*
 outputs/features/*
 outputs/activations/*
+outputs/probes/*
 outputs/runs/*
 external/
 data/benchmark_manifest.jsonl
