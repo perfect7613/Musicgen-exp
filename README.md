@@ -8,7 +8,7 @@ Public framing:
 
 This repository builds on the MusicGen sparse-autoencoder workflow from [PapayaResearch/musicdiscovery](https://github.com/PapayaResearch/musicdiscovery), associated with Singh et al., [Discovering and Steering Interpretable Concepts in Large Generative Music Models](https://arxiv.org/abs/2505.18186). It extends that setup toward future-event probes, real-audio motif recurrence benchmarks, and causal feature intervention experiments.
 
-This project follows a strict [real-data-only policy](docs/data-policy.md): no fake benchmark records, synthetic motif labels, placeholder annotations, or fake model outputs are allowed as experiment evidence.
+This project follows a strict real-data-only policy: no fake benchmark records, synthetic motif labels, placeholder annotations, or fake model outputs are allowed as experiment evidence.
 
 ## Research Question
 
@@ -121,7 +121,6 @@ Current results do **not** yet establish such a feature. They establish the real
 ```text
 configs/              Experiment configs
 data/annotations/     Annotation examples and generated review artifacts
-docs/                 Project plan, data policy, RunPod workflow, method notes
 notebooks/            Exploratory notebooks
 outputs/              Local/generated run artifacts, ignored where appropriate
 results/              GitHub-safe run summaries and manifests
@@ -188,15 +187,10 @@ PYTHONPATH=src python scripts/extract_motif_features.py \
 6. Run feature ablation/scaling experiments on the strongest candidates.
 7. Report positive or null results without hiding the layer-mismatch and labeling caveats.
 
-## Documentation
+## Guardrails
 
-- [Data policy](docs/data-policy.md)
-- [Benchmark construction](docs/benchmark.md)
-- [Audio features](docs/audio-features.md)
-- [Annotation workflow](docs/annotations.md)
-- [MusicGen integration](docs/musicgen-integration.md)
-- [Probe design](docs/probes.md)
-- [SAE interventions](docs/interventions.md)
-- [Evaluation dashboards](docs/evaluation.md)
-- [RunPod setup](docs/runpod.md)
-- [Budget-aware full workflow](docs/runpod-full-study.md)
+- Do not commit synthetic benchmark examples as evidence.
+- Do not train probes on unverified recurrence labels.
+- Do not mix residual activations and SAE checkpoints from mismatched hook layers.
+- Do not commit raw MTG-Jamendo audio or large tensor dumps to GitHub.
+- Store heavy derived artifacts in the Hugging Face dataset repo and keep GitHub limited to reproducible manifests, summaries, and code.
