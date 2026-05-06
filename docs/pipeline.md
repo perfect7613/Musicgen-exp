@@ -128,3 +128,16 @@ uv run python scripts/run_sae_interventions.py \
 ```
 
 See `docs/interventions.md`.
+
+## Stage 8: Evaluate And Dashboard
+
+After probe and intervention outputs exist:
+
+```bash
+uv run python scripts/generate_evaluation_report.py \
+  --probe-results outputs/probes/sae/probe_results.jsonl \
+  --intervention-index outputs/interventions/intervention_index.jsonl \
+  --output-dir outputs/evaluation
+```
+
+See `docs/evaluation.md`.

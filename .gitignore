@@ -13,6 +13,7 @@ outputs/features/*
 outputs/activations/*
 outputs/probes/*
 outputs/interventions/*
+outputs/evaluation/*
 outputs/runs/*
 external/
 data/benchmark_manifest.jsonl

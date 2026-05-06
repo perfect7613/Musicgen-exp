@@ -58,6 +58,8 @@ Probe training from real activation artifacts is documented in [docs/probes.md](
 
 SAE feature intervention runs are documented in [docs/interventions.md](docs/interventions.md).
 
+Evaluation dashboards and go/no-go summaries are documented in [docs/evaluation.md](docs/evaluation.md).
+
 ## RunPod
 
 RunPod setup is documented in [docs/runpod.md](docs/runpod.md). The repo includes helper scripts, but pod creation is intentionally manual/explicit so credits are not spent accidentally.
