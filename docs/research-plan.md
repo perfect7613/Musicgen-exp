@@ -43,3 +43,7 @@ This project extends Singh et al.'s MusicGen SAE work from concept discovery and
 - Gate 5: Causal interventions produce recurrence-specific effects beyond controls.
 
 If a gate fails, document the failure as a useful null or methods note.
+
+## Implementation Spine
+
+All runs should start by validating `configs/experiment.yaml` and creating a run manifest. See `docs/pipeline.md` for the current staged workflow.

@@ -42,6 +42,7 @@ src/musicgen_exp/     Reusable experiment code
 ```bash
 uv sync --extra dev
 uv run python scripts/validate_annotations.py --schema-only
+uv run python scripts/validate_config.py --config configs/experiment.yaml
 uv run pytest
 ```
 
