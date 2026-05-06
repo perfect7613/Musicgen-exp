@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/musicgen_exp/__init__.py
+src/musicgen_exp/annotations.py
+src/musicgen_exp.egg-info/PKG-INFO
+src/musicgen_exp.egg-info/SOURCES.txt
+src/musicgen_exp.egg-info/dependency_links.txt
+src/musicgen_exp.egg-info/requires.txt
+src/musicgen_exp.egg-info/top_level.txt

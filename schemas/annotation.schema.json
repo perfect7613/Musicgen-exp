@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/musicgen-exp/annotation.schema.json",
+  "title": "MusicGen Long-Horizon Coherence Annotation",
+  "type": "object",
+  "required": [
+    "track_id",
+    "source_dataset",
+    "license",
+    "source_url",
+    "prefix_window",
+    "generation_window",
+    "motif_window",
+    "recurrence_window",
+    "event_type",
+    "manual_verification_status"
+  ],
+  "properties": {
+    "track_id": { "type": "string" },
+    "source_dataset": { "type": "string" },
+    "license": { "type": "string" },
+    "source_url": { "type": "string" },
+    "prompt": { "type": "string" },
+    "prefix_window": { "$ref": "#/$defs/window" },
+    "generation_window": { "$ref": "#/$defs/window" },
+    "motif_window": { "$ref": "#/$defs/window" },
+    "recurrence_window": { "$ref": "#/$defs/window" },
+    "event_type": {
+      "type": "string",
+      "enum": ["motif_recurrence", "no_recurrence", "ambiguous"]
+    },
+    "instrument_tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "section_label": { "type": "string" },
+    "energy": { "type": "number" },
+    "spectral_centroid": { "type": "number" },
+    "chroma_features_path": { "type": "string" },
+    "manual_verification_status": {
+      "type": "string",
+      "enum": ["unverified", "verified_positive", "verified_negative", "rejected", "ambiguous"]
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "window": {
+      "type": "object",
+      "required": ["start_seconds", "end_seconds"],
+      "properties": {
+        "start_seconds": { "type": "number", "minimum": 0 },
+        "end_seconds": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

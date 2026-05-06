@@ -1,0 +1,43 @@
+project:
+  name: musicgen-long-horizon-coherence
+  seed: 7613
+
+model:
+  pilot: facebook/musicgen-small
+  primary: facebook/musicgen-large
+  primary_layers: [24, 36, 46]
+  secondary_layers: [2, 12]
+
+sae:
+  source: musicdiscovery
+  expansion_factor: 32
+  k: 100
+  use_existing_checkpoints_first: true
+
+benchmark:
+  source: mtg-jamendo
+  target_clip_count: 100
+  prefix_seconds: 10
+  continuation_seconds: 30
+  domain: instrumental
+  release_audio: false
+
+horizons:
+  local_seconds: [1, 3]
+  medium_seconds: [5, 10]
+  long_seconds: [15, 25]
+
+metrics:
+  primary_motif_metric: chroma_dtw
+  secondary_audio_embedding_metric: clap
+  controls:
+    - shuffled_labels
+    - position_only
+    - prompt_or_source_only
+    - acoustic_features_only
+    - random_sae_features
+    - local_only_features
+
+outputs:
+  figures_dir: outputs/figures
+  audio_dir: outputs/audio
