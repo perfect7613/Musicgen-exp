@@ -64,6 +64,8 @@ Evaluation dashboards and go/no-go summaries are documented in [docs/evaluation.
 
 RunPod setup is documented in [docs/runpod.md](docs/runpod.md). The repo includes helper scripts, but pod creation is intentionally manual/explicit so credits are not spent accidentally.
 
+The full budget-aware execution and release workflow is documented in [docs/runpod-full-study.md](docs/runpod-full-study.md).
+
 ## Evidence Standard
 
 A candidate feature only counts as a long-horizon coherence feature if it:

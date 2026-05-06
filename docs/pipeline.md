@@ -141,3 +141,13 @@ uv run python scripts/generate_evaluation_report.py \
 ```
 
 See `docs/evaluation.md`.
+
+## Stage 9: RunPod Release Workflow
+
+Before spending GPU credits, run:
+
+```bash
+bash scripts/runpod_preflight.sh
+```
+
+Then follow `docs/runpod-full-study.md`.

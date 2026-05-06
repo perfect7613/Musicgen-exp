@@ -2,6 +2,8 @@
 
 This project uses `runpodctl` for remote GPU work. Pod creation is intentionally explicit so credits are not spent accidentally.
 
+For the full budget-aware study workflow, see [runpod-full-study.md](runpod-full-study.md).
+
 ## 1. Authenticate
 
 ```bash
