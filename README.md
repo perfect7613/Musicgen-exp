@@ -8,7 +8,7 @@ Public framing:
 
 This repository builds on the MusicGen sparse-autoencoder workflow from [PapayaResearch/musicdiscovery](https://github.com/PapayaResearch/musicdiscovery), associated with Singh et al., [Discovering and Steering Interpretable Concepts in Large Generative Music Models](https://arxiv.org/abs/2505.18186). It extends that setup toward future-event probes, real-audio motif recurrence benchmarks, and causal feature intervention experiments.
 
-This project follows a strict real-data-only policy: no fake benchmark records, synthetic motif labels, placeholder annotations, or fake model outputs are allowed as experiment evidence.
+All reported artifacts in this repository come from real MTG-Jamendo metadata/audio and real MusicGen runs.
 
 ## Research Question
 
@@ -127,7 +127,7 @@ results/              GitHub-safe run summaries and manifests
 schemas/              JSON schemas for benchmark annotations
 scripts/              CLI entrypoints for each pipeline stage
 src/musicgen_exp/     Reusable experiment code
-tests/                Unit tests and guardrails
+tests/                Unit tests
 ```
 
 ## Quick Start
@@ -186,11 +186,3 @@ PYTHONPATH=src python scripts/extract_motif_features.py \
 5. Compare against position-only, acoustic-only, source/prompt-only, shuffled-label, and local-horizon controls.
 6. Run feature ablation/scaling experiments on the strongest candidates.
 7. Report positive or null results without hiding the layer-mismatch and labeling caveats.
-
-## Guardrails
-
-- Do not commit synthetic benchmark examples as evidence.
-- Do not train probes on unverified recurrence labels.
-- Do not mix residual activations and SAE checkpoints from mismatched hook layers.
-- Do not commit raw MTG-Jamendo audio or large tensor dumps to GitHub.
-- Store heavy derived artifacts in the Hugging Face dataset repo and keep GitHub limited to reproducible manifests, summaries, and code.
