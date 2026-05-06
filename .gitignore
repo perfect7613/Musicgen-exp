@@ -10,6 +10,7 @@ __pycache__/
 outputs/audio/*
 outputs/figures/*
 outputs/features/*
+outputs/activations/*
 outputs/runs/*
 external/
 data/benchmark_manifest.jsonl

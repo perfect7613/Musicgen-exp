@@ -58,6 +58,17 @@ cd /workspace/musicgen-exp
 bash scripts/setup_remote.sh
 ```
 
+For MusicGen activation extraction, also install the upstream SAE/HookedMusicGen stack:
+
+```bash
+cd /workspace
+git clone https://github.com/PapayaResearch/musicdiscovery.git
+cd musicdiscovery
+pip install -r requirements.txt
+```
+
+Then pass `--musicdiscovery-path /workspace/musicdiscovery` to activation extraction commands.
+
 ## 6. Shutdown Discipline
 
 Always stop or terminate pods when finished. GPU notebooks are excellent at quietly eating credits.

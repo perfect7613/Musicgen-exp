@@ -21,6 +21,10 @@ audio = [
   "librosa>=0.10",
   "soundfile>=0.12"
 ]
+model = [
+  "transformer-lens>=2.0",
+  "sae-lens>=5.0"
+]
 dev = [
   "pytest>=8.0",
   "ruff>=0.6"

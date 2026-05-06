@@ -52,6 +52,8 @@ Extract motif features only from local real audio referenced by that manifest. S
 
 Manual annotation review and deterministic split creation are documented in [docs/annotations.md](docs/annotations.md).
 
+MusicGen activation extraction uses the TransformerLens-style `HookedMusicGen` wrapper from `musicdiscovery`; see [docs/musicgen-integration.md](docs/musicgen-integration.md).
+
 ## RunPod
 
 RunPod setup is documented in [docs/runpod.md](docs/runpod.md). The repo includes helper scripts, but pod creation is intentionally manual/explicit so credits are not spent accidentally.

@@ -76,3 +76,20 @@ uv run python scripts/create_annotation_splits.py \
   --schema schemas/annotation.schema.json \
   --output data/annotation_splits.json
 ```
+
+## Stage 5: Extract MusicGen Activations
+
+On RunPod, install musicdiscovery and model dependencies, then extract residual and optional SAE activations:
+
+```bash
+uv run python scripts/extract_musicgen_activations.py \
+  --mode teacher-forced \
+  --manifest data/benchmark_manifest.jsonl \
+  --audio-root /path/to/mtg-jamendo-audio \
+  --musicdiscovery-path /workspace/musicdiscovery \
+  --model-size pilot \
+  --device cuda \
+  --output-dir outputs/activations
+```
+
+See `docs/musicgen-integration.md`.

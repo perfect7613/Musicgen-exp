@@ -5,6 +5,7 @@ project:
 model:
   pilot: facebook/musicgen-small
   primary: facebook/musicgen-large
+  pilot_layers: [2, 6, 12, 18, 22]
   primary_layers: [24, 36, 46]
   secondary_layers: [2, 12]
 
