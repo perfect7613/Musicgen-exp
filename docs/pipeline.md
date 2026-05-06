@@ -108,3 +108,23 @@ uv run python scripts/train_future_event_probes.py \
 ```
 
 See `docs/probes.md`.
+
+## Stage 7: Run SAE Interventions
+
+After candidate features are ranked and SAE checkpoints are available:
+
+```bash
+uv run python scripts/run_sae_interventions.py \
+  --manifest data/benchmark_manifest.jsonl \
+  --candidate-ranking outputs/probes/sae/local_seconds.candidate_feature_ranking.jsonl \
+  --audio-root /path/to/mtg-jamendo-audio \
+  --musicdiscovery-path /workspace/musicdiscovery \
+  --sae-checkpoint-root /path/to/sae/checkpoints \
+  --model-size primary \
+  --device cuda \
+  --seeds 7613,7614,7615 \
+  --top-k 5 \
+  --output-dir outputs/interventions
+```
+
+See `docs/interventions.md`.
